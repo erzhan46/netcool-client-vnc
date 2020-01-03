@@ -37,9 +37,11 @@ fi
 sed -i -e "s|%USER%|$USER|" -e "s|%HOME%|$HOME|" /etc/supervisor/conf.d/supervisord.conf
 
 # home folder
-mkdir -p $HOME/.config/pcmanfm/LXDE/
-ln -sf /usr/local/share/doro-lxde-wallpapers/desktop-items-0.conf $HOME/.config/pcmanfm/LXDE/
-chown -R $USER:$USER $HOME
+if [ ! -x "$HOME/.config/pcmanfm/LXDE/" ]; then
+    mkdir -p $HOME/.config/pcmanfm/LXDE/
+    ln -sf /usr/local/share/doro-lxde-wallpapers/desktop-items-0.conf $HOME/.config/pcmanfm/LXDE/
+    chown -R $USER:$USER $HOME
+fi
 
 # nginx workers
 sed -i 's|worker_processes .*|worker_processes 1;|' /etc/nginx/nginx.conf
@@ -69,4 +71,4 @@ fi
 PASSWORD=
 HTTP_PASSWORD=
 
-exec /bin/tini -- /usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf
+exec /bin/tini -- supervisord -n -c /etc/supervisor/supervisord.conf
