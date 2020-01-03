@@ -1,13 +1,13 @@
 .PHONY: build run
 
 # Default values for variables
-REPO  ?= dorowu/ubuntu-desktop-lxde-vnc
+REPO  ?= erzhan/ubuntu-netcool-vnc
 TAG   ?= latest
 # you can choose other base image versions
 IMAGE ?= ubuntu:18.04
 # choose from supported flavors (see available ones in ./flavors/*.yml)
 FLAVOR ?= lxde
-# armhf or amd64
+# amd64 only
 ARCH ?= amd64
 
 # These files will be generated from teh Jinja templates (.j2 sources)
