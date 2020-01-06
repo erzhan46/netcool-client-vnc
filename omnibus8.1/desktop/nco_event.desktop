@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Netcool/OMNIbus Event List
+Comment=Netcool/OMNIbus Event List
+Exec=/opt/IBM/tivoli/netcool/omnibus/bin/nco_event
+Icon=/opt/IBM/tivoli/netcool/omnibus/desktop/icons/nco_event.xpm
+Terminal=false
+Type=Application
+StartupNotify=false
+Categories=

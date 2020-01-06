@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Netcool/OMNIbus MIB Manager
+Comment=Netcool/OMNIbus MIB Manager
+Exec=/opt/IBM/tivoli/netcool/omnibus/bin/nco_mibmanager
+Icon=/opt/IBM/tivoli/netcool/omnibus/desktop/icons/nco_mibmanager.xpm
+Terminal=false
+Type=Application
+StartupNotify=false
+Categories=

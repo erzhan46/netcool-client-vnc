@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Netcool/OMNIbus Administrator
+Comment=Netcool/OMNIbus Administrator
+Exec=/opt/IBM/tivoli/netcool/omnibus/bin/nco_config
+Icon=/opt/IBM/tivoli/netcool/omnibus/desktop/icons/nco_config.xpm
+Terminal=false
+Type=Application
+StartupNotify=false
+Categories=

@@ -37,7 +37,7 @@ RUN add-apt-repository -y ppa:fcwu-tw/apps \
 
 RUN apt update \
     && apt install -y --no-install-recommends --allow-unauthenticated \
-        lxde gtk2-engines-murrine gnome-themes-standard gtk2-engines-pixbuf gtk2-engines-murrine arc-theme \
+        lxde gtk2-engines-murrine gnome-themes-standard gtk2-engines-pixbuf gtk2-engines-murrine arc-theme libxm4 \
     && apt autoclean -y \
     && apt autoremove -y \
     && rm -rf /var/lib/apt/lists/*
@@ -128,10 +128,16 @@ LABEL maintainer="ybeisem@us.ibm.com"
 
 COPY --from=builder /src/web/dist/ /usr/local/lib/web/frontend/
 COPY rootfs /
-RUN ln -sf /usr/local/lib/web/frontend/static/websockify /usr/local/lib/web/frontend/static/novnc/utils/websockify && \
-	chmod +x /usr/local/lib/web/frontend/static/websockify/run
+RUN ln -sf /usr/local/lib/web/frontend/static/websockify /usr/local/lib/web/frontend/static/novnc/utils/websockify \
+    && chmod +x /usr/local/lib/web/frontend/static/websockify/run \
+    && ln -s /usr/lib/x86_64-linux-gnu/libXpm.so.4.11.0 /usr/lib/x86_64-linux-gnu/libXp.so.6 \
+    && /opt/IBM/tivoli/netcool/bin/nco_igen
 
-COPY --from=netcool /opt/IBM/ /opt/IBM/
+COPY --from=netcool /opt/IBM/tivoli/ /opt/IBM/tivoli/
+COPY omnibus8.1/desktop/ /usr/share/applications/
+COPY omnibus8.1/desktop/ /root/Desktop
+
+COPY omnibus8.1/etc/ /opt/IBM/tivoli/netcool/etc/
 
 EXPOSE 80
 WORKDIR /root
