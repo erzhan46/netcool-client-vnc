@@ -103,6 +103,22 @@ RUN cd /src/web \
 
 
 ################################################################################
+# netcool client
+################################################################################
+
+FROM ubuntu:18.04 as netcool
+
+ADD omnibus8.1 /omnibus8.1
+
+RUN apt-get update \
+    && apt-get install unzip \
+    && cd /omnibus8.1 \
+       && unzip TVL*zip \
+       && ./install_silent.sh omnibus8.1.response -acceptLicense
+
+
+
+################################################################################
 # merge
 ################################################################################
 FROM system
@@ -113,9 +129,12 @@ COPY rootfs /
 RUN ln -sf /usr/local/lib/web/frontend/static/websockify /usr/local/lib/web/frontend/static/novnc/utils/websockify && \
 	chmod +x /usr/local/lib/web/frontend/static/websockify/run
 
+COPY --from=netcool /opt/IBM/ /opt/IBM/
+
 EXPOSE 80
 WORKDIR /root
 ENV HOME=/home/ubuntu \
     SHELL=/bin/bash
 HEALTHCHECK --interval=30s --timeout=5s CMD curl --fail http://127.0.0.1:6079/api/health
 ENTRYPOINT ["/startup.sh"]
+

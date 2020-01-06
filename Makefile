@@ -42,13 +42,6 @@ gen-ssl:
 	openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 		-keyout ssl/nginx.key -out ssl/nginx.crt
 
-clean:
-	rm -f $(templates)
-
-extra-clean:
-	docker rmi $(REPO):$(TAG)
-	docker image prune -f
-
 # Run jinja2cli to parse Jinja template applying rules defined in the flavors definitions
 %: %.j2 flavors/$(FLAVOR).yml
 	docker run -v $(shell pwd):/data vikingco/jinja2cli \
