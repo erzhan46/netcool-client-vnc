@@ -14,6 +14,7 @@ The container contains the following components :
 - Xvfb running the X11 server in memory
 - x11vnc exporting the X11 display through VNC
 - and all regular X applications, like the LXDE desktop and apps
+- Netcool/Omnibus v8.1 (Admin client, Event Viewer and MIB Manager)
 
 Wiring them all
 ------------------
@@ -39,3 +40,24 @@ The Web frontend adds the following features :
   sure the noVNC rendering ajusts to that size
 - provide a flash video rendering transporting the sound (???)
 
+Netcool/Omnibus specifics
+=========================
+Netcool/OMnibus will be deployed in /opt/IBM/tivoli/netcool.
+Desktop shortcuts will be crated for Administrator, Event Viewer and MIB Manager.
+Object Server connectivity can be loaded using local volume mounting by creating local directory containing omni.dat and hosts files. Directory should be mounted to /root/etc directory in the container. Container startup script will place omni.dat to /opt/IBM/tivoli/netcool/etc directory and run nco_igen. Contents of a hosts file will be added to /etc/hosts.
+Example of omni.dat:
+```
+#
+# omni.dat file as prototype for interfaces file
+#
+# Ident: $Id: omni.dat 1.5 1999/07/13 09:34:20 chris Development $
+#
+[NCOMS]
+{
+	Primary: host1 4100 ssl 4150
+}
+```
+Corresponding hosts file:
+```
+192.168.1.11 host1
+```
