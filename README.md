@@ -71,7 +71,3 @@ The Resolution of virtual desktop adapts browser window size when first connecti
 docker run -p 6081:443 --e RESOLUTION=1920x1080 -v /dev/shm:/dev/shm -v $HOME/share:/root/etc erzhan/ubuntu-netcool-vnc
 ```
 
-License
-==================
-
-See the LICENSE file for details.
