@@ -30,7 +30,7 @@ docker run -p 6080:80 -p 5900:5900 -v /dev/shm:/dev/shm -v $HOME/share:/root/etc
 ```
 6. Access VNC via web browser at http://127.0.0.1:6080/ or using VNC client at localhost:5900
 
-<img src="screenshots/omnibus.png" width=700/>
+<img src="screenshots/omnibus.png" width=800/>
 
 7. Environment variable `VNC_PASSWORD` can be set to enable password for VNC
 
