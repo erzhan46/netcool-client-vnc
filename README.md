@@ -7,11 +7,11 @@ Forked from (https://github.com/fcwu/docker-ubuntu-vnc-desktop)
 Quick Start
 -------------------------
 
-1. Clone this repository (make sure to use --recursive to initialize all submodules)
+1. Clone this repository (make sure to use _'--recursive'_ to initialize all submodules)
 ```
 git clone --recursive https://github.com/erzhan46/netcool-client-vnc
 ```
-2. Download from Linux 64 bit version of Netcool/Omnibus package from Passport Advantage (e.g. _"IBM Tivoli Netcool OMNIbus 8.1.0.21 Core - Linux 64bit Multilingual (CC3V7ML)"_ ) and copy it to omnibus8.1 directory.
+2. Download Netcool/Omnibus package (64-bit Linux) from Passport Advantage (e.g. _"IBM Tivoli Netcool OMNIbus 8.1.0.21 Core - Linux 64bit Multilingual (CC3V7ML)"_ ) and copy it to omnibus8.1 directory.
 ```
 cp TVL_NTCL_OMN_V8.1.0.21_CORE_LNX_M.zip <Dev>/netcool-client-vnc/omnibus8.1
 ```
@@ -20,12 +20,12 @@ cp TVL_NTCL_OMN_V8.1.0.21_CORE_LNX_M.zip <Dev>/netcool-client-vnc/omnibus8.1
 cd <Dev>/netcool-client-vnc
 make build
 ```
-4. Prepare Object Server connectivity by creating a separate l;ocal directory e.g. $HOME/share and placing two files in it:
+4. Prepare Object Server connectivity by creating local directory e.g. $HOME/share and placing two files in it:
 - omni.dat - Netcool/Omnibus connections file
 - hosts - Containing IP to hostname matches for remote server(s) where Object Server(s) is running. (This is required to ensure that nco_event will run)
-5. Run the docker container mapping local port `6080` for Web access, port '5900' for local VNC access and mounting directory containing omni.dat and hosts files
+5. Run the docker container mapping local port `6080` for Web access, port '5900' for local VNC access and mounting directory containing omni.dat and hosts files to /root/etc in the container:
 ```
-docker run -p 6080:80 -p5900:5900 -v /dev/shm:/dev/shm -v $HOME/share:/root/etc erzhan/ubuntu-netcool-vnc
+docker run -p 6080:80 -p 5900:5900 -v /dev/shm:/dev/shm -v $HOME/share:/root/etc erzhan/ubuntu-netcool-vnc
 
 ```
 6. Access VNC via web browser at http://127.0.0.1:6080/ or using VNC client at localhost:5900
