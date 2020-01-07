@@ -1,1 +1,3 @@
-
+- SSL connectivity to Object Server (load cert, etc.)
+- Capability to run Object Server in the container (will it be useful? For local testing?)
+- Capability to deploy probes in a container and expose them to external event sources (again - will it be useful?)
