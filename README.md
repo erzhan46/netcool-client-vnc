@@ -29,7 +29,7 @@ docker run -p 6080:80 -p5900:5900 -v /dev/shm:/dev/shm -v $HOME/share:/root/etc 
 ```
 6. Access VNC via web browser at http://127.0.0.1:6080/
 
-<img src="https://raw.github.com/erzhan46/netcool-client-vnc/blob/master/screenshots/omnibus.png?v1" width=700/>
+<img src="https://github.com/erzhan46/netcool-client-vnc/blob/master/screenshots/omnibus.png" width=700/>
 
 **Ubuntu Version**
 
