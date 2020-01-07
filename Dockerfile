@@ -126,18 +126,20 @@ RUN apt-get update \
 FROM system
 LABEL maintainer="ybeisem@us.ibm.com"
 
+COPY --from=netcool /opt/IBM/tivoli/ /opt/IBM/tivoli/
+COPY omnibus8.1/desktop/ /usr/share/applications/
+COPY omnibus8.1/desktop/ /root/Desktop
+
+# Copying omni.dat - One way to pass connection parameters. Another way is to map local drive - see documentation for more details
+COPY omnibus8.1/etc/ /opt/IBM/tivoli/netcool/etc/
+
+
 COPY --from=builder /src/web/dist/ /usr/local/lib/web/frontend/
 COPY rootfs /
 RUN ln -sf /usr/local/lib/web/frontend/static/websockify /usr/local/lib/web/frontend/static/novnc/utils/websockify \
     && chmod +x /usr/local/lib/web/frontend/static/websockify/run \
     && ln -s /usr/lib/x86_64-linux-gnu/libXpm.so.4.11.0 /usr/lib/x86_64-linux-gnu/libXp.so.6 \
     && /opt/IBM/tivoli/netcool/bin/nco_igen
-
-COPY --from=netcool /opt/IBM/tivoli/ /opt/IBM/tivoli/
-COPY omnibus8.1/desktop/ /usr/share/applications/
-COPY omnibus8.1/desktop/ /root/Desktop
-
-COPY omnibus8.1/etc/ /opt/IBM/tivoli/netcool/etc/
 
 EXPOSE 80
 WORKDIR /root

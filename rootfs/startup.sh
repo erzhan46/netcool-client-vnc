@@ -1,5 +1,14 @@
 #!/bin/bash
 
+if [ -f /root/etc/omni.dat ]; then
+    cp /root/etc/omni.dat /opt/IBM/tivoli/netcool/etc/omni.dat
+    /opt/IBM/tivoli/netcool/bin/nco_igen
+fi
+
+if [ -f /root/etc/hosts ]; then
+    cat /root/etc/hosts >> /etc/hosts
+fi
+
 if [ -n "$VNC_PASSWORD" ]; then
     echo -n "$VNC_PASSWORD" > /.password1
     x11vnc -storepasswd $(cat /.password1) /.password2
