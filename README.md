@@ -1,20 +1,35 @@
 netcool-client-vnc
 =========================
 
-Docker image to provide HTML5 VNC interface to access Netcool/Omnibus 8.1 client in Ubuntu 16.04 LXDE desktop environment.
+Docker image to provide VNC interface to access Netcool/Omnibus 8.1 client in Ubuntu 16.04 LXDE desktop environment.
 
 Quick Start
 -------------------------
 
-Run the docker container and access with port `6080`
+1. Clone this repository (make sure to use --recursive to initialize all submodules)
+```
+git clone --recursive https://github.com/erzhan46/netcool-client-vnc
+```
+2. Download from Linux 64 bit version of Netcool/Omnibus package from Passport Advantage (e.g. _"IBM Tivoli Netcool OMNIbus 8.1.0.21 Core - Linux 64bit Multilingual (CC3V7ML)"_ ) and copy it to omnibus8.1 directory.
+```
+cp TVL_NTCL_OMN_V8.1.0.21_CORE_LNX_M.zip <Dev>/netcool-client-vnc/omnibus8.1
+```
+3. Build the docker image
+```
+cd <Dev>/netcool-client-vnc
+make build
+```
+4. Prepare Object Server connectivity by creating a separate l;ocal directory e.g. $HOME/share and placing two files in it:
+- omni.dat - Netcool/Omnibus connections file
+- hosts - Containing IP to hostname matches for remote server(s) where Object Server(s) is running. (This is required to ensure that nco_event will run)
+5. Run the docker container mapping local port `6080` for Web access, port '5900' for local VNC access and mounting directory containing omni.dat and hosts files
+```
+docker run -p 6080:80 -p5900:5900 -v /dev/shm:/dev/shm -v $HOME/share:/root/etc erzhan/ubuntu-netcool-vnc
 
 ```
-docker run -p 6080:80 -v /dev/shm:/dev/shm dorowu/ubuntu-desktop-lxde-vnc
-```
+6. Access VNC via web browser at http://127.0.0.1:6080/
 
-Browse http://127.0.0.1:6080/
-
-<img src="https://raw.github.com/fcwu/docker-ubuntu-vnc-desktop/master/screenshots/lxde.png?v1" width=700/>
+<img src="https://raw.github.com/erzhan46/netcool-client-vnc/blob/master/screenshots/omnibus.png?v1" width=700/>
 
 **Ubuntu Version**
 
